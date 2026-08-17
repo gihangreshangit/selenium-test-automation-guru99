@@ -1,138 +1,156 @@
-# selenium-test-automation
+# Selenium Test Automation Project
 
-Selenium WebDriver test automation framework using Java, Maven and TestNG.
+## Overview
 
-A lightweight, configurable TestNG + Selenium framework scaffolded with Maven to structure UI tests, manage dependencies, run suites locally or in CI, and generate test reports.
+This project demonstrates web UI test automation using **Java, Selenium WebDriver, Maven, and TestNG**.
 
-## Table of Contents
+The project automates the login functionality of the **Guru99 Demo Bank** application and includes both positive and negative login test scenarios.
 
-- [Features](#features)
-- [Tech stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Quick start](#quick-start)
-- [Configuration](#configuration)
-- [Running tests](#running-tests)
-- [Project structure](#project-structure)
-- [Writing tests](#writing-tests)
-- [Reports & logs](#reports--logs)
-- [Continuous integration](#continuous-integration)
-- [Contributing](#contributing)
-- [License & contact](#license--contact)
+This project was created as a learning and portfolio project to demonstrate fundamental QA automation skills.
 
-## Features
+## Technologies Used
 
-- TestNG test runner with XML suite support
-- Maven build and dependency management
-- Cross-browser execution (Chrome, Firefox, Edge — configurable)
-- Support for headless execution
-- Configurable test parameters (browser, baseUrl, environment, headless)
-- Test reports via TestNG / Surefire (extendable to Allure or custom reporters)
-- Page Object Model friendly structure
+* Java
+* Selenium WebDriver
+* TestNG
+* Maven
+* Google Chrome
+* Git
+* GitHub
 
-## Tech stack
+## Project Structure
 
-- Java 11+ (works with later versions; adjust settings if using Java 17+)
-- Maven
-- TestNG
-- Selenium WebDriver
-- (Optional) WebDriverManager (recommended) or local browser drivers
+```text
+SeleniumProject/
+│
+├── pom.xml
+├── README.md
+├── .gitignore
+│
+└── src/
+    └── test/
+        └── java/
+            └── guru99Test.java
+```
 
-## Prerequisites
+## Test Scenarios
 
-- Java JDK installed and JAVA_HOME configured
-- Maven installed (mvn on PATH)
-- A supported browser installed (Chrome, Firefox, Edge) or use remote/grid
-- Optionally: WebDriverManager dependency (recommended) to auto-manage driver binaries
+### 1. Successful Login
 
-Verify versions:
-- java -version
-- mvn -v
+**Objective:** Verify that a user can log in using valid credentials.
 
-## Quick start
+**Test steps:**
 
-1. Clone the repository:
-   git clone https://github.com/gihanmadurapriya/selenium-test-automation.git
-   cd selenium-test-automation
+1. Open the Guru99 Demo Bank login page.
+2. Enter a valid user ID.
+3. Enter a valid password.
+4. Click the Login button.
+5. Verify that the expected Manager ID is displayed.
 
-2. Run the full test suite (default):
-   mvn clean test
+### 2. Unsuccessful Login
 
-3. Run a specific TestNG suite:
-   mvn clean test -DsuiteXmlFile=src/test/resources/testng.xml
+**Objective:** Verify that the system displays an error message when an invalid password is entered.
 
-4. Run a single test class or method:
-   mvn -Dtest=YourTestClass test
-   mvn -Dtest=YourTestClass#yourTestMethod test
+**Test steps:**
 
-5. Run with custom parameters (examples):
-   - Specify browser:
-     mvn clean test -Dbrowser=chrome
-   - Headless:
-     mvn clean test -Dbrowser=chrome -Dheadless=true
-   - Run only smoke tests (if grouped):
-     mvn clean test -Dgroups=smoke
+1. Open the Guru99 Demo Bank login page.
+2. Enter a valid user ID.
+3. Enter an invalid password.
+4. Click the Login button.
+5. Verify that the expected error alert is displayed.
 
-(Adjust property names to match your test framework's config if different.)
+## Automation Features
 
-## Configuration
+The project demonstrates:
 
-This project expects configuration values to be read from one of the following (choose one or combine as implemented):
+* Selenium WebDriver browser automation
+* TestNG test annotations
+* `@BeforeMethod` test setup
+* Multiple test cases
+* Selenium locators
+* Web element interaction
+* Positive and negative testing
+* TestNG assertions
+* Maven test execution
+* Basic browser lifecycle management
 
-- src/test/resources/config.properties (recommended)
-- System properties passed via -D (e.g., -Dbrowser=firefox)
-- Environment variables
-
-Common configuration properties:
-- browser — chrome|firefox|edge
-- baseUrl — application base URL
-- headless — true|false
-- timeout — implicit/explicit default timeout in seconds
-- env — dev|qa|prod
-
-Example config.properties:
-browser=chrome
-baseUrl=https://example.com
-headless=false
-timeout=10
-
-Tip: Use WebDriverManager in your setup to avoid manual driver downloads:
-- io.github.bonigarcia:webdrivermanager
-
-## Running tests in CI / headless servers
-
-- Use headless mode and set browser binaries / drivers appropriately.
-- Example:
-  mvn clean test -Dbrowser=chrome -Dheadless=true
-
-- If using a Selenium Grid or remote WebDriver, set remote URL:
-  -DremoteUrl=http://grid-host:4444/wd/hub
-
-## Project structure (recommended / typical)
-
-- src/main/java
-  - framework utilities, base classes (BaseTest, DriverFactory, utils)
-- src/test/java
-  - tests and page objects
-- src/test/resources
-  - testng.xml, config.properties, test data
-- pom.xml
-  - Maven configuration and dependencies
-- target/
-  - build outputs and test reports
-
-Adjust to match this repository's current layout if different.
-
-## Writing tests
-
-- Follow Page Object Model (POM) to keep tests readable and maintainable.
-- Example minimal TestNG test (outline):
+## TestNG Annotations Used
 
 ```java
-public class LoginTest extends BaseTest {
-    @Test
-    public void loginWithValidCredentials() {
-        LoginPage login = new LoginPage(driver);
-        HomePage home = login.login("user@example.com","password");
-        assertTrue(home.isLoggedIn());
-    }
-}
+@BeforeMethod
+```
+
+Used to open the browser and navigate to the login page before each test.
+
+```java
+@Test
+```
+
+Used to define automated test cases.
+
+```java
+@AfterMethod
+```
+
+Used to close the browser after each test.
+
+## How to Run the Tests
+
+### Prerequisites
+
+Make sure the following are installed:
+
+* Java JDK
+* Maven
+* Google Chrome
+* Visual Studio Code or another Java IDE
+
+### Clone the Repository
+
+After cloning the repository, open the project directory in VS Code.
+
+### Run the Tests
+
+Open the terminal in the project directory:
+
+```bash
+mvn clean test
+```
+
+Maven will compile the project and execute the TestNG tests.
+
+## Expected Result
+
+A successful test execution should show:
+
+```text
+Tests run: 2
+Failures: 0
+Errors: 0
+Skipped: 0
+BUILD SUCCESS
+```
+
+## Future Improvements
+
+The project will be extended with more advanced automation concepts, including:
+
+* Page Object Model (POM)
+* Explicit waits
+* Data-driven testing
+* Additional test scenarios
+* Screenshot capture on test failure
+* Test reporting
+* Cross-browser testing
+* Continuous Integration using GitHub Actions
+
+## Learning Objective
+
+The main objective of this project is to develop practical experience with web automation testing and gradually build a maintainable Selenium test automation framework.
+
+## Author
+
+**Gihan Greshan Madurapriya**
+
+Software Engineering Undergraduate
+QA / Software Testing Enthusiast
