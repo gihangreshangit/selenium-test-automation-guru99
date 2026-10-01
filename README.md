@@ -150,7 +150,7 @@ The main objective of this project is to develop practical experience with web a
 
 ## Author
 
-**Gihan Greshan Madurapriya**
+**Gihan Greshan**
 
 Software Engineering Undergraduate
 QA / Software Testing Enthusiast
